@@ -21,7 +21,7 @@ export class Wizard extends Component{
         })
     }
 
-    addHouse = () => {
+    addHouse = (key,val) => {
         const {name, address, city, state, zip} = this.state
         axios.post('/api/houses', {name, address, city, state, zip})
             .then(res => {
