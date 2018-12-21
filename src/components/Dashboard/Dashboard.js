@@ -14,14 +14,19 @@ export class Dashboard extends Component{
     }
 
     componentDidMount(){
-        this.getHouses()
-    }
-
-    getHouses = () => {
         axios.get('/api/houses').then(res => {
             console.log(res)
             this.setState({
                 house: res.data
+            })
+        })
+    }
+
+    deleteHouse = () => {
+        axios.delete('/api/house/${id}')
+        .then(res => {
+            this.setState({
+                houses: res.data
             })
         })
     }
@@ -46,6 +51,7 @@ export class Dashboard extends Component{
                 <button >Add New Property</button>
                 </Link>
                 <House />
+                {houseList}
             </div>
         )
     }

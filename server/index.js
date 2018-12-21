@@ -17,5 +17,9 @@ app.use(express.json())
 
 app.get('/api/houses', controller.getHouses)
 
+app.post(`/api/houses`, controller.addHouse)
+
+app.delete(`/api/house/:id`, controller.deleteHouse)
+
 
 app.listen(PORT, () => console.log(`aye yo dood, ${PORT} is connected yo!`))
