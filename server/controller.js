@@ -1,7 +1,7 @@
 module.exports = {
     getHouses: (req,res) => {
         const db = req.app.get('db')
-        db.grab_houses(req.params).then(response => {
+        db.grab_houses().then(response => {
             res.status(200).send(response)
         }).catch(err => console.log(err))
     },
@@ -11,10 +11,10 @@ module.exports = {
         console.log(req.body)
         const db = req.app.get('db')
         let {name, address, city, state, zip, img, mortgage, rent} = req.body
-        db.create_house({name, address, city, state, zip, img, mortgage, rent})
+        db.create_house({name: name, address: address, city: city, state: state, zip: zip, img: img, mortgage: mortgage, rent: rent})
             .then(response => {
-            res.status(200).send(response, console.log)
-            console.log(req.body)
+            res.status(200).send(response)
+            console.log(response)
         }).catch(err => console.log(err))
     },
 
