@@ -25,7 +25,7 @@ export class Wizard extends Component{
         const {name, address, city, state, zip} = this.state
         axios.post('/api/houses', {name, address, city, state, zip})
             .then(res => {
-                this.setState(res.data)
+                console.log(res.data)
             })
     }
 
@@ -39,11 +39,16 @@ export class Wizard extends Component{
                 <Link to='/'>
                 <button>Cancel</button>
                 </Link>
-                <input onChange={e => this.handleChange(this.state.name, e.target.value)}/>
-                <input onChange={e => this.handleChange(this.state.address, e.target.value)}/>
-                <input onChange={e => this.handleChange(this.state.city,e.target.value)}/>
-                <input onChange={e => this.handleChange(this.state.state, e.target.value)}/>
-                <input onChange={e => this.handleChange(this.state.zip, e.target.value)}/>
+                <span>Name:</span>
+                <input type='text' onChange={e => this.handleChange(this.state.name, e.target.value)}/>
+                <span>Address:</span>
+                <input type='text' onChange={e => this.handleChange(this.state.address, e.target.value)}/>
+                <span>City:</span>
+                <input type='text' onChange={e => this.handleChange(this.state.city,e.target.value)}/>
+                <span>State:</span>
+                <input type='text' onChange={e => this.handleChange(this.state.state, e.target.value)}/>
+                <span>Zip:</span>
+                <input type='text' onChange={e => this.handleChange(this.state.zip, e.target.value)}/>
             </div>
         )
     }

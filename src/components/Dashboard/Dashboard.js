@@ -15,19 +15,29 @@ export class Dashboard extends Component{
 
     componentDidMount(){
         axios.get('/api/houses').then(res => {
-            console.log(res)
+            console.log(res.data)
             this.setState({
-                house: res.data
+                houses: res.data
             })
         })
     }
 
-    deleteHouse = () => {
-        axios.delete('/api/house/${id}')
+    getHouses = () => {
+        axios.get('/api/houses').then(res => {
+            console.log(res)
+            this.setState({
+                houses: res.data
+            })
+        })
+    }
+
+    deleteHouse = (id) => {
+        axios.delete(`/api/house/${id}`)
         .then(res => {
             this.setState({
                 houses: res.data
             })
+            this.getHouses()
         })
     }
 
@@ -36,11 +46,16 @@ export class Dashboard extends Component{
             return(
                 <div>
                     <House key={house.id}
+                    id={house.id}
                     name={house.name}
                     address={house.address}
                     city={house.city}
                     state={house.state}
-                    zip={house.zip} />
+                    zip={house.zip}
+                    img={house.img}
+                    mortgage={house.mortgage} 
+                    rent={house.rent}
+                    deleteHouse={() => this.deleteHouse(house.id)}/>
                 </div>
             )
         })
@@ -50,7 +65,7 @@ export class Dashboard extends Component{
                 <Link to='/wizard'>
                 <button >Add New Property</button>
                 </Link>
-                <House />
+                {/* <House /> */}
                 {houseList}
             </div>
         )
